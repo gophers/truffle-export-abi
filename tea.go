@@ -44,9 +44,8 @@ func main() {
 func proc(c *cobra.Command, args []string) {
 	fmt.Println(appName, "Working on", *src)
 	if *rebuild {
-		buildsPath := *src + "/build"
-		fmt.Println(appName, "Remove old files", buildsPath)
-		err := os.RemoveAll(buildsPath)
+		fmt.Println(appName, "Remove old files", *src)
+		err := os.RemoveAll(*src)
 		if err != nil {
 			fmt.Println(appName, "Error", err)
 		}
