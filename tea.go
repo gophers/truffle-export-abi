@@ -31,8 +31,8 @@ func main() {
 		Run: proc,
 	}
 
-	src = rootCmd.Flags().String("src", "./json", "Source contract json path")
-	dist = rootCmd.Flags().String("dist", "./abi", "ABI file dist path")
+	src = rootCmd.Flags().String("src", "./build/contracts", "Source contract json path")
+	dist = rootCmd.Flags().String("dist", "./build/abi", "ABI file dist path")
 	rebuild = rootCmd.Flags().Bool("rebuild", false, "Rebuild contracts")
 
 	if err := rootCmd.Execute(); err != nil {
@@ -52,7 +52,7 @@ func proc(c *cobra.Command, args []string) {
 		}
 
 		fmt.Println(appName, "Rebuild contracts ...")
-		cmd := exec.Command("truffle", "compile")
+		cmd := exec.Command("truffle", "compile", "--all")
 		cmd.Stdout = os.Stdout
 		err = cmd.Run()
 		if err != nil {
